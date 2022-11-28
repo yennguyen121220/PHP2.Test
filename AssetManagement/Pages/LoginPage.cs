@@ -9,9 +9,11 @@ namespace AssetManagement.Pages
         private WebObject _usernameTextbox = new WebObject(By.CssSelector("input#basic_username"), "Username Textbox");
         private WebObject _passwordTextbox = new WebObject(By.Id("basic_password"), "Password Textbox");
         private WebObject _loginButton = new WebObject(By.XPath("//button[@type='submit']"), "Log in Button");
-        private WebObject _errorMessageLabel = new WebObject(By.XPath("//p[@style]"), "Error Messsage Label");
+        private WebObject _errorMessageLabel = new WebObject(By.CssSelector("div.ant-notification-notice-description"), "Error Messsage Label");
         private WebObject _errorMessageUsername = new WebObject(By.CssSelector("#basic_username_help .ant-form-item-explain-error"), "Error Username Message");
         private WebObject _errorMessagePassword = new WebObject(By.CssSelector("#basic_password_help .ant-form-item-explain-error"), "Error Password Message");
+        private WebObject _getLoginSuccessMessage = new WebObject(By.CssSelector("span.ams__header__breadcrumb__item"), "Get login successfully message");
+        private WebObject _getMessagLoginFirstTime = new WebObject(By.CssSelector(".modal-title.h4"), "Get message when login successfully at the first time");
         //Contructor
         public LoginPage() { }
 
@@ -21,6 +23,10 @@ namespace AssetManagement.Pages
             DriverUtils.EnterText(_usernameTextbox, username);
             DriverUtils.EnterText(_passwordTextbox, password);
             DriverUtils.ClickOnElement(_loginButton);
+        }
+        public string GetMessageLoginSuccessfully()
+        {
+            return DriverUtils.GetTextFromElement(_getLoginSuccessMessage);
         }
 
         public string GetMessageErrorText()
@@ -34,6 +40,10 @@ namespace AssetManagement.Pages
         public string GetMessageErrorPassword()
         {
             return DriverUtils.GetTextFromElement(_errorMessagePassword);
+        }
+        public string GetMessageLoginTheFirstTime()
+        {
+            return DriverUtils.GetTextFromElement(_getMessagLoginFirstTime);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace AssetManagement.Test
             _homePage.VisitHomePage();
             _loginPage.Login(username, password);
             Console.WriteLine("Test Login With Valid Account Using Parameters");
-            // Assert.That(_loginPage.GetMessageErrorText().Trim(), Is.EqualTo("Username or password is incorrect. Please try again"));
+            Assert.That(_loginPage.GetMessageLoginSuccessfully().Trim(), Is.EqualTo("Home"));
         }
 
         [TestCase("adminHCM", "1234567890"), Description("Log in with invalid email or password using parameter")]
@@ -29,7 +29,7 @@ namespace AssetManagement.Test
             Assert.That(_loginPage.GetMessageErrorText().Trim(), Is.EqualTo("Username or password is incorrect. Please try again"));
         }
 
-        [TestCase("ad", "123"), Description("Log in with invalid email or password using parameter")]
+        [TestCase("ad", "123"), Description("Log in with invalid format email/password using parameter")]
         [Category("Regression")]
         public void LoginUnsucessfullyIfAccountInvalidFormat(string username, string password)
         {
@@ -38,6 +38,16 @@ namespace AssetManagement.Test
             _loginPage.Login(username, password);
             Assert.That(_loginPage.GetMessageErrorPassword().Trim(), Is.EqualTo("Password must be at least 8 characters"));
             Assert.That(_loginPage.GetMessageErrorUserName().Trim(), Is.EqualTo("Username must be at least 3 characters"));
+        }
+
+        [TestCase("AliceBrown435", "password"), Description("requiring change password popup at the first time log in successfully")]
+        [Category("Regression")]
+        public void LoginSuccessfullyAtTheFirstTime(string username, string password)
+        {
+            Console.WriteLine("Test Login With Invalid Account Using Parameters");
+            _homePage.VisitHomePage();
+            _loginPage.Login(username, password);
+            Assert.That(_loginPage.GetMessageLoginTheFirstTime().Trim(), Is.EqualTo("Change password"));
         }
 
     }
