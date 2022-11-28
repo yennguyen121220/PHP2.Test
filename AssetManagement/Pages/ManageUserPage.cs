@@ -7,6 +7,8 @@ using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
 using AssetManagement.Library;
 using NUnit.Framework;
+using AssetManagement.Test;
+
 
 
 
@@ -19,7 +21,9 @@ namespace AssetManagement.Pages
         private WebObject _btnFilter = new WebObject(By.CssSelector(".ams__dropdownfilter__icon"), "Filter Button");
         private WebObject _chkAdminOption = new WebObject(By.CssSelector("input[value='admin']"), "Admin Option Checkbox");
         private WebObject _chkStaffOption = new WebObject(By.CssSelector("input[value='staff']"), "Staff Option Checkbox");
-        private WebObject _rowTypeResultLabel;
+        private WebObject _filterByAdminRole = new WebObject(By.XPath("//div[contains(text(),'Admin')]"), "Filter By Admin Role");
+        private WebObject _filterByStaffRole = new WebObject(By.XPath("//div[contains(text(),'Staff')]"), "Filter By Staff Role");
+
 
         //Contructor
         public ManageUserPage() { }
@@ -40,18 +44,19 @@ namespace AssetManagement.Pages
         }
         public void VerifyFilteredByAdmin()
         {
-            for (int i = 1; i <= 15; i++)
-            {
-                _rowTypeResultLabel = new WebObject(By.XPath($"(//div[contains(text(),'Admin')])[{i}]"), $"Admin Type Row {i} ");
-                Assert.That(DriverUtils.GetTextFromElement(_rowTypeResultLabel), Does.Contain("Admin"));
+            IList < IWebElement > _lblFilterByRole = BaseTest.GetWebDriver().FindElements(By.XPath("//div[contains(text(),'Admin')]"));
+            int count = _lblFilterByRole.Count;
+            for(int i = 1; i <= count ; i++){
+                Assert.That(DriverUtils.GetTextFromElement(_filterByAdminRole), Does.Contain("Admin"));
             }
+            
         }
         public void VerifyFilteredByStaff()
         {
-            for (int i = 1; i <= 12; i++)
-            {
-                _rowTypeResultLabel = new WebObject(By.XPath($"(//div[contains(text(),'Staff')])[{i}]"), $"Staff Type Row {i} ");
-                Assert.That(DriverUtils.GetTextFromElement(_rowTypeResultLabel), Does.Contain("Staff"));
+            IList < IWebElement > _lblFilterByRole = BaseTest.GetWebDriver().FindElements(By.XPath("//div[contains(text(),'Staff')]"));
+            int count = _lblFilterByRole.Count;
+            for(int i = 1; i <= count ; i++){
+                Assert.That(DriverUtils.GetTextFromElement(_filterByStaffRole), Does.Contain("Staff Code"));
             }
         }
         
