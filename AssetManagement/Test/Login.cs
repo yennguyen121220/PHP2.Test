@@ -9,7 +9,7 @@ namespace AssetManagement.Test
         private HomePage _homePage = new HomePage();
         private LoginPage _loginPage = new LoginPage();
 
-        [TestCase("adminHCM", "123123123"), Description("Log in with invalid email or password using parameter")]
+        [TestCase("adminHCM", "321321321"), Description("Log in with invalid email or password using parameter")]
         [Category("Regression")]
         public void LoginSucessfullyWithValidAccount(string username, string password)
         {
