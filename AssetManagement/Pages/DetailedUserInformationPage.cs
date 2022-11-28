@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using AssetManagement.Library;
+using NUnit.Framework;
 
 namespace AssetManagement.Pages
 {
@@ -15,19 +16,18 @@ namespace AssetManagement.Pages
         private WebObject _typeInfor = new WebObject(By.XPath("//div[@class='ams_detail__item__label'][normalize-space()='Type']"), "Type Information");
         private WebObject _locationInfor = new WebObject(By.XPath("//div[normalize-space()='Location']"), "Location Information");
 
-
-        public DetailedUserInformationPage(){ }
+        public DetailedUserInformationPage() { }
 
         //Page Methods
 
         public string GetResultFromRecordItemPage()
         {
-            return DriverUtils.GetTextFromElement(_typeInfor)+" "
-            +DriverUtils.GetTextFromElement(_staffCodeInfor)+" "+
-            DriverUtils.GetTextFromElement( _fullNameInfor)+" "+DriverUtils.GetTextFromElement(_userNameInfor)+" "+
-            DriverUtils.GetTextFromElement(_datOfBirthInfor)+" "+DriverUtils.GetTextFromElement(_genderInfor)
-            +" "+ DriverUtils.GetTextFromElement(_datOfBirthInfor)+" "+DriverUtils.GetTextFromElement(_joinDateInfor)+
-            " "+ DriverUtils.GetTextFromElement(_locationInfor);
+            return DriverUtils.GetTextFromElement(_typeInfor) + " "
+            + DriverUtils.GetTextFromElement(_staffCodeInfor) + " " +
+            DriverUtils.GetTextFromElement(_fullNameInfor) + " " + DriverUtils.GetTextFromElement(_userNameInfor) + " " +
+            DriverUtils.GetTextFromElement(_datOfBirthInfor) + " " + DriverUtils.GetTextFromElement(_genderInfor)
+            + " " + DriverUtils.GetTextFromElement(_datOfBirthInfor) + " " + DriverUtils.GetTextFromElement(_joinDateInfor) +
+            " " + DriverUtils.GetTextFromElement(_locationInfor);
 
         }
         public void ChoosingRecordItem()
