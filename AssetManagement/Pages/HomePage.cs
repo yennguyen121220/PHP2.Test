@@ -9,6 +9,7 @@ namespace AssetManagement.Pages
         //Web Elements
 
         private WebObject _managaUserLink = new WebObject(By.XPath("//span[text()='Manage User']"), "Manage User Link");
+        private WebObject _manageUserButton = new WebObject(By.XPath("//span[@class='ant-menu-title-content'][normalize-space()='Manage User']"), "Manage User Tab");
 
         //Contructor
         public HomePage() { }
@@ -23,6 +24,10 @@ namespace AssetManagement.Pages
         public void VisitHomePage()
         {
             DriverUtils.GoToUrl(ConfigurationHelper.GetConfigurationByKey("TestURL"));
+        }
+        public void ChoosingManageUser()
+        {
+            DriverUtils.ClickOnElement(_manageUserButton);
         }
     }
 }
