@@ -54,8 +54,8 @@ namespace AssetManagement.Test
                     Node.Log(logstatus, "#Test Name: " + TestContext.CurrentContext.Test.Name + " #Status: " + logstatus);
                     break;
             }
-            GetWebDriver().Quit();
-            GetWebDriver().Dispose();
+            // GetWebDriver().Quit();
+            // GetWebDriver().Dispose();
             Console.WriteLine("BaseTest Tear Down");
         }
 

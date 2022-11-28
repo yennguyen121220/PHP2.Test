@@ -15,20 +15,22 @@ namespace AssetManagement.Test
         private ManageUserPage _manageUserPage = new ManageUserPage();
 
         [Test, Description("Filter By Admin Type")]
+        [Category("Regression")]
         public void FilterByAdminTypeSuccessfully()
         {
             _homePage.VisitHomePage();
-            _loginPage.Login("adminHCM", "123123123");
+            _loginPage.Login("adminHCM", "321321321");
             _manageUserPage.ManageUser();
             _manageUserPage.ClickOnAdminOption();
             _manageUserPage.VerifyFilteredByAdmin();
         }
 
         [Test, Description("Filter By Staff Type")]
+        [Category("Regression")]
         public void FilterByStaffTypeSuccessfully()
         {
             _homePage.VisitHomePage();
-            _loginPage.Login("adminHCM", "123123123");
+            _loginPage.Login("adminHCM", "321321321");
             _manageUserPage.ManageUser();
             _manageUserPage.ClickOnStaffOption();
             _manageUserPage.VerifyFilteredByStaff();

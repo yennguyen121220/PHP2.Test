@@ -16,10 +16,9 @@ namespace AssetManagement.Pages
     {
         //Web Elements
         private WebObject _btnManageUserPage = new WebObject(By.XPath("//span[@class='ant-menu-title-content'][normalize-space()='Manage User']"), "Manage User Button");
-        private WebObject _btnFilter = new WebObject(By.CssSelector("span[aria-label='filter']"), "Filter Button");
+        private WebObject _btnFilter = new WebObject(By.CssSelector(".ams__dropdownfilter__icon"), "Filter Button");
         private WebObject _chkAdminOption = new WebObject(By.CssSelector("input[value='admin']"), "Admin Option Checkbox");
         private WebObject _chkStaffOption = new WebObject(By.CssSelector("input[value='staff']"), "Staff Option Checkbox");
-        private WebObject _btnPage2 = new WebObject(By.CssSelector("a[aria-label='Page 2 is your current page']"), "Page 1 button");
         private WebObject _rowTypeResultLabel;
 
         //Contructor
@@ -41,7 +40,7 @@ namespace AssetManagement.Pages
         }
         public void VerifyFilteredByAdmin()
         {
-            for (int i = 1; i <= 12; i++)
+            for (int i = 1; i <= 15; i++)
             {
                 _rowTypeResultLabel = new WebObject(By.XPath($"(//div[contains(text(),'Admin')])[{i}]"), $"Admin Type Row {i} ");
                 Assert.That(DriverUtils.GetTextFromElement(_rowTypeResultLabel), Does.Contain("Admin"));
@@ -49,7 +48,7 @@ namespace AssetManagement.Pages
         }
         public void VerifyFilteredByStaff()
         {
-            for (int i = 1; i <= 9; i++)
+            for (int i = 1; i <= 12; i++)
             {
                 _rowTypeResultLabel = new WebObject(By.XPath($"(//div[contains(text(),'Staff')])[{i}]"), $"Staff Type Row {i} ");
                 Assert.That(DriverUtils.GetTextFromElement(_rowTypeResultLabel), Does.Contain("Staff"));
