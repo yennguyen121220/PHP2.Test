@@ -1,71 +1,60 @@
+using System.Net.Mail;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using OpenQA.Selenium;
+using SeleniumExtras.WaitHelpers;
 using AssetManagement.Library;
+using NUnit.Framework;
+
+
 
 namespace AssetManagement.Pages
 {
     public class ManageUserPage
     {
-        private WebObject _searchTextbox = new WebObject(By.XPath("//input[@placeholder='Search...']"), "Search Textbox");
-        private WebObject _searchButton = new WebObject(By.CssSelector(".anticon.anticon-search"),"Search button");
-        private WebObject _getStaffName = new WebObject(By.CssSelector(".ams__record:nth-child(2) div"),"Staff's fullname value");
-        private WebObject _getStaffCode = new WebObject(By.CssSelector(".ams__record:nth-child(1) div"),"StaffCode value");
-        private WebObject _getErrorMessage = new WebObject(By.CssSelector(".ant-empty-description"),"StaffCode value");
-        private WebObject _staffCode = new WebObject(By.CssSelector("tr:nth-child(2) td:nth-child(1) div"), "Get StaffCode value");
-        private WebObject _staffName = new WebObject(By.CssSelector("tr:nth-child(2) td:nth-child(2) div"), "Get StaffName value");
-        private WebObject _userName = new WebObject(By.CssSelector("tr:nth-child(2) td:nth-child(3) div"), "Get StaffName value");
-        private WebObject _staffCodeValue = new WebObject(By.CssSelector(".ams_detail__item:nth-child(1) .ams_detail__item__value"), "StaffCode value");
-        private WebObject _staffNameValue = new WebObject(By.CssSelector(".ams_detail__item:nth-child(2) .ams_detail__item__value"), "StaffName value");
-        private WebObject _userNameValue = new WebObject(By.CssSelector(".ams_detail__item:nth-child(3) .ams_detail__item__value"), "UserName value");
+        //Web Elements
+        private WebObject _btnManageUserPage = new WebObject(By.XPath("//span[@class='ant-menu-title-content'][normalize-space()='Manage User']"), "Manage User Button");
+        private WebObject _btnFilter = new WebObject(By.CssSelector("span[aria-label='filter']"), "Filter Button");
+        private WebObject _chkAdminOption = new WebObject(By.CssSelector("input[value='admin']"), "Admin Option Checkbox");
+        private WebObject _chkStaffOption = new WebObject(By.CssSelector("input[value='staff']"), "Staff Option Checkbox");
+        private WebObject _btnPage2 = new WebObject(By.CssSelector("a[aria-label='Page 2 is your current page']"), "Page 1 button");
+        private WebObject _rowTypeResultLabel;
 
-        // private WebObject _getErrorMessage = new WebObject(By.CssSelector(".ant-empty-description", "Get Error Message"));
+        //Contructor
+        public ManageUserPage() { }
+
+        //Page Methods
+        public void ManageUser()
+        {
+            DriverUtils.ClickOnElement(_btnManageUserPage);
+            DriverUtils.ClickOnElement(_btnFilter);
+        }
+        public void ClickOnAdminOption()
+        {
+            DriverUtils.ClickOnElement(_chkAdminOption);
+        }
+        public void ClickOnStaffOption()
+        {
+            DriverUtils.ClickOnElement(_chkStaffOption);
+        }
+        public void VerifyFilteredByAdmin()
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                _rowTypeResultLabel = new WebObject(By.XPath($"(//div[contains(text(),'Admin')])[{i}]"), $"Admin Type Row {i} ");
+                Assert.That(DriverUtils.GetTextFromElement(_rowTypeResultLabel), Does.Contain("Admin"));
+            }
+        }
+        public void VerifyFilteredByStaff()
+        {
+            for (int i = 1; i <= 9; i++)
+            {
+                _rowTypeResultLabel = new WebObject(By.XPath($"(//div[contains(text(),'Staff')])[{i}]"), $"Staff Type Row {i} ");
+                Assert.That(DriverUtils.GetTextFromElement(_rowTypeResultLabel), Does.Contain("Staff"));
+            }
+        }
         
-        public ManageUserPage(){}
-
-        public void EnterSeachValue(string searchValue)
-        {
-            DriverUtils.EnterText(_searchTextbox, searchValue);
-            DriverUtils.ClickOnElement(_searchButton);
-        }
-        public string GetStaffNameText()
-        {
-            return DriverUtils.GetTextFromElement(_getStaffName);
-        }
-        public string GetStaffCodeText()
-        {
-            return DriverUtils.GetTextFromElement(_getStaffCode);
-        }
-        public string GetErrorMessage()
-        {
-            return DriverUtils.GetTextFromElement(_getErrorMessage);
-        }
-        public string GetStaffCode()
-        {
-            return DriverUtils.GetTextFromElement(_staffCode);
-        }
-        public string GetStaffName()
-        {
-            return DriverUtils.GetTextFromElement(_staffName);
-        }
-        public string GetUserName()
-        {
-            return DriverUtils.GetTextFromElement(_userName);
-        }
-        public void ClickOnDetailUser()
-        {
-            DriverUtils.ClickOnElement(_staffName);
-        }
-        public string CompareStaffCode()
-        {
-            return DriverUtils.GetTextFromElement(_staffCodeValue);
-        }
-        public string CompareStaffName()
-        {
-            return DriverUtils.GetTextFromElement(_staffNameValue);
-        }
-        public string CompareStaffUserName()
-        {
-            return DriverUtils.GetTextFromElement(_userNameValue);
-        }
-
     }
 }
