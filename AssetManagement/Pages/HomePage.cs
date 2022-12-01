@@ -15,7 +15,7 @@ namespace AssetManagement.Pages
 
         //Page Methods
 
-        public void ClickManageUSerLink()
+        public void ClickManageUserLink()
         {
             DriverUtils.ClickOnElement(_managaUserLink);
         }

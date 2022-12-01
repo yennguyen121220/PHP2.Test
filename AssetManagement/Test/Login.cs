@@ -49,6 +49,5 @@ namespace AssetManagement.Test
             _loginPage.Login(username, password);
             Assert.That(_loginPage.GetMessageLoginTheFirstTime().Trim(), Is.EqualTo("Change password"));
         }
-
     }
 }
