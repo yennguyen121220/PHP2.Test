@@ -23,7 +23,6 @@ namespace AssetManagement.Pages
         private WebObject _chkStaffOption = new WebObject(By.XPath("//input[@value='staff']/parent::label"), "Staff Option Checkbox");
         private WebObject _filterByAdminRole = new WebObject(By.XPath("//div[contains(text(),'Admin')]"), "Filter By Admin Role");
         private WebObject _filterByStaffRole = new WebObject(By.XPath("//div[contains(text(),'Staff')]"), "Filter By Staff Role");
-
         private WebObject _txtSearchBox = new WebObject(By.XPath("//input[@type='text']"), "Search Textbox");
         private WebObject _btnSearchIcon = new WebObject(By.CssSelector(".anticon.anticon-search"),"Search button");
         private WebObject _tblStaffCode = new WebObject(By.CssSelector(".ams__record:nth-child(1) div"),"StaffCode value");
@@ -65,11 +64,17 @@ namespace AssetManagement.Pages
                 Assert.That(DriverUtils.GetTextFromElement(_filterByStaffRole), Does.Contain("Staff Code"));
             }
         }
-        public void EnterSeachValue(string searchValue)
+        public void EnterSearchValue(string searchValue)
         {
             DriverUtils.EnterText(_txtSearchBox, searchValue);
             DriverUtils.ClickOnElement(_btnSearchIcon);
         }
+
+        public bool IfSearchValueExist()
+        {
+            return DriverUtils.IsElementDisplayed(_tblStaffCode);
+        }
+        
         public string GetStaffCodeText()
         {
             return DriverUtils.GetTextFromElement(_tblStaffCode);
@@ -79,10 +84,14 @@ namespace AssetManagement.Pages
             return DriverUtils.GetTextFromElement(_tblStaffName);
         }
 
-        public string GetErrorMessage()
+        public string GetErrorMessageNotFound()
         {
             return DriverUtils.GetTextFromElement(_lblErrorMessageNotFound);
         }
-        
+
+        internal object GetAssetNameValue()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

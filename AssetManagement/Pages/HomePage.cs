@@ -8,7 +8,9 @@ namespace AssetManagement.Pages
     {
         //Web Elements
 
-        private WebObject _managaUserLink = new WebObject(By.XPath("//span[text()='Manage User']"), "Manage User Link");
+        private WebObject _btnManagaUserLink = new WebObject(By.XPath("//span[text()='Manage User']"), "Manage User Link");
+        private WebObject _btnManageAssetLink = new WebObject(By.XPath("//span[text()='Manage Asset']"), "Manage Asset Link");
+        private WebObject _btnCreateAsset = new WebObject(By.CssSelector("button.ams__button"), "Create Asset Link");
 
         //Contructor
         public HomePage() { }
@@ -17,8 +19,19 @@ namespace AssetManagement.Pages
 
         public void ClickManageUserLink()
         {
-            DriverUtils.ClickOnElement(_managaUserLink);
+            DriverUtils.ClickOnElement(_btnManagaUserLink);
         }
+
+        public void ClickManageAssetLink()
+        {
+            DriverUtils.ClickOnElement(_btnManageAssetLink);
+        }
+
+        public void ClickCreateAssetButton()
+        {
+            DriverUtils.ClickOnElement(_btnCreateAsset);
+        }
+
 
         public void VisitHomePage()
         {

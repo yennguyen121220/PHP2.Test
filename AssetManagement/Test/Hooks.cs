@@ -16,7 +16,7 @@ namespace AssetManagement.Test
         public static IConfiguration Config;
         public static ThreadLocal<IWebDriver> ThreadLocalWebDriver = new ThreadLocal<IWebDriver>();
 
-        const string AppSettingPath = "Configurations\\appsettings.json";
+        const string AppSettingPath = "Configurations//appsettings.json";
 
         [OneTimeSetUp]
         public void MySetup()
@@ -27,7 +27,7 @@ namespace AssetManagement.Test
             Config = ConfigurationHelper.ReadConfiguration(AppSettingPath);
 
             //Init Extend report
-            var dir = TestContext.CurrentContext.TestDirectory + "\\";
+            var dir = TestContext.CurrentContext.TestDirectory + "//";
             var actualPath = dir.Substring(0, dir.LastIndexOf("bin"));
             var projectPath = new Uri(actualPath).LocalPath;
             var reportPath = projectPath + ConfigurationHelper.GetConfigurationByKey("TestResult.FilePath");

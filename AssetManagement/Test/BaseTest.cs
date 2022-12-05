@@ -39,7 +39,8 @@ namespace AssetManagement.Test
                     var fileLocation = ScreenshotHelper.CaptureScreenshot(GetWebDriver(), TestContext.CurrentContext.Test.ClassName, TestContext.CurrentContext.Test.Name);
                     var mediaEntity = ScreenshotHelper.CaptureScreenShotAndAttachToExtendReport(GetWebDriver(), TestContext.CurrentContext.Test.Name);
                     Node.Fail("#Test Name: " + TestContext.CurrentContext.Test.Name + " #Status: " + logstatus + stacktrace, mediaEntity);
-                    Node.Fail("#Screenshot Below: " + Node.AddScreenCaptureFromPath(fileLocation));
+                    Node.Fail("Screenshot", mediaEntity);
+                    // Node.Fail("#Screenshot Below: " + Node.AddScreenCaptureFromPath(fileLocation));
                     break;
                 case TestStatus.Inconclusive:
                     logstatus = Status.Warning;
